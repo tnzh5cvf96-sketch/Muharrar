@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Повторение хадисов — аль-Мухарраар</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Literata:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#edf1ed; --card:#fbfcfa; --ink:#15231e; --muted:#5f6d66; --line:#d4dcd5;
+  --accent:#0f6b53; --accent-ink:#ffffff; --gold:#a8741a; --goldbg:#f5ead2;
+  --ok:#1e7a45; --okbg:#dcf0e2; --bad:#a83a2c; --badbg:#f6dfdb; --chip:#e1e8e2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1815; --card:#17231f; --ink:#e4ece7; --muted:#93a39a; --line:#2a3a34;
+    --accent:#3fb28f; --accent-ink:#06130e; --gold:#e0ac52; --goldbg:#2f2714;
+    --ok:#5cc98a; --okbg:#173425; --bad:#ee8272; --badbg:#3a1f1a; --chip:#20302a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1815; --card:#17231f; --ink:#e4ece7; --muted:#93a39a; --line:#2a3a34;
+  --accent:#3fb28f; --accent-ink:#06130e; --gold:#e0ac52; --goldbg:#2f2714;
+  --ok:#5cc98a; --okbg:#173425; --bad:#ee8272; --badbg:#3a1f1a; --chip:#20302a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Literata",Georgia,"Times New Roman",serif;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px 96px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 14px}
+h1{font-size:1.15rem;margin:0;font-weight:700}
+h1 small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.streak{background:var(--goldbg);color:var(--gold);border-radius:999px;padding:6px 12px;font-weight:700;font-size:.9rem;white-space:nowrap}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}
+nav .in{display:flex;width:100%;max-width:720px}
+nav button{flex:1;padding:14px 4px;border:0;background:none;color:var(--muted);font:inherit;font-size:.92rem;cursor:pointer;border-top:3px solid transparent}
+nav button[aria-current="true"]{color:var(--accent);border-top-color:var(--accent);font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h2{margin:0 0 8px;font-size:1.05rem}
+.muted{color:var(--muted);font-size:.9rem}
+.big{font-size:2.6rem;font-weight:700;line-height:1;color:var(--accent)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--muted);flex:1;min-width:140px}
+select,input[type=number],input[type=search],textarea{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+button.btn{font:inherit;font-weight:600;padding:12px 18px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+button.btn.sec{background:transparent;color:var(--accent)}
+button.btn.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+button.btn:disabled{opacity:.45;cursor:default}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.pick:focus-within{outline:3px solid var(--gold);outline-offset:2px}
+.ar{font-family:"Amiri","Noto Naskh Arabic","Traditional Arabic",serif;direction:rtl;text-align:right;font-size:1.4rem;line-height:2}
+.ar.sm{font-size:1.15rem;line-height:1.8}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.bar{height:6px;background:var(--chip);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.qtype{font-size:.85rem;color:var(--muted);margin:0 0 6px}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opt{font:inherit;text-align:right;direction:rtl;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);cursor:pointer;font-family:"Amiri","Noto Naskh Arabic",serif;font-size:1.25rem;line-height:1.8}
+.opt.num{text-align:center;font-family:"Literata",serif;font-size:1.2rem}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.reveal{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.chip{background:var(--chip);border-radius:999px;padding:2px 10px;font-size:.8rem;color:var(--muted)}
+.actions{display:flex;gap:10px;margin-top:14px}
+.actions .btn{flex:1}
+.list{display:grid;gap:8px}
+.pick{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.pick.on{border-color:var(--accent);background:var(--okbg)}
+.pick input{width:22px;height:22px;margin-top:6px;accent-color:var(--accent)}
+.pick .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+.pick .ar{font-size:1.2rem;line-height:1.8}
+.sticky{position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:3}
+.dist{display:grid;gap:6px}
+.dist div{display:grid;grid-template-columns:110px 1fr 32px;gap:8px;align-items:center;font-size:.88rem}
+.dist .b{height:10px;border-radius:6px;background:var(--chip);overflow:hidden}
+.dist .b i{display:block;height:100%;background:var(--accent)}
+.mist{display:grid;gap:8px;margin-top:10px}
+.mist div{border-inline-start:3px solid var(--bad);padding-inline-start:10px}
+textarea{min-height:90px;font-size:.8rem;font-family:monospace;direction:ltr}
+.empty{text-align:center;padding:24px 8px}
+@media (prefers-reduced-motion: reduce){.bar i{transition:none}}
+.hr{display:flex;gap:8px;align-items:center}
+.hr select{width:auto;padding:6px 8px;font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="ttl"></h1>
+    <div class="hr"><select id="lang" aria-label="Language"><option value="ru">Русский</option><option value="en">English</option><option value="ar">العربية</option></select><div class="streak" id="streak"></div></div>
+  </header>
+  <main id="app"></main>
+</div>
+<nav><div class="in">
+  <button data-tab="quiz"></button>
+  <button data-tab="pick"></button>
+  <button data-tab="stats"></button>
+</div></nav>
+
+<script>
+/* ---------- ДАННЫЕ ---------- */
+const M='متفق عليه', MS='رواه مسلم', BU='رواه البخاري', R=s=>'رواه '+s;
+const RAW=[
+[188,'أبو هريرة','لا يقبل الله صلاة أحدكم إذا أحدث حتى يتوضأ',M+' واللفظ لمسلم'],
+[189,'أبو سعيد الخدري','لا ينظر الرجل إلى عورة الرجل ولا المرأة إلى عورة المرأة',MS],
+[190,'بهز بن حكيم عن أبيه عن جده','احفظ عورتك إلا من زوجتك أو ما ملكت يمينك',R('أحمد وأبو داود والترمذي والنسائي وابن ماجه')],
+[193,'عائشة','لا يقبل الله صلاة حائض إلا بخمار',R('أحمد وأبو داود وابن ماجه والترمذي والحاكم')],
+[194,'ابن عمر','من جر ثوبه خيلاء لم ينظر الله إليه يوم القيامة',R('النسائي والترمذي')],
+[195,'ابن عباس','الفخذ عورة',R('أحمد وأبو يعلى والترمذي')],
+[197,'أبو هريرة','لا يصلي أحدكم في الثوب الواحد ليس على عاتقه منه شيء',M],
+[198,'جابر بن عبد الله','كنت أصلي في ثوب واحد فقال: إذا كان واسعاً فخالف بين طرفيه، وإن كان ضيقاً فاشدده على حقوك',M],
+[199,'سعيد بن يزيد','كان رسول الله ﷺ يصلي في النعلين',M],
+[200,'أنس بن مالك','أن رسول الله ﷺ كان يصلي نحو بيت المقدس',MS],
+[201,'عثمان الأخنسي','ما بين المشرق والمغرب قبلة',R('الترمذي')],
+[202,'عامر بن ربيعة','رأيت النبي ﷺ يصلي على راحلته حيث توجهت به',M],
+[203,'زيد بن أرقم','إن كنا لنتكلم في الصلاة على عهد النبي ﷺ',M],
+[204,'أبو هريرة','التسبيح للرجال والتصفيق للنساء',M],
+[205,'مطرف بن عبد الله بن الشخير','رأيت رسول الله ﷺ يصلي وفي صدره أزيز كأزيز الرحى من البكاء',R('أحمد وأبو داود والترمذي وابن حبان والنسائي')],
+[206,'أبو هريرة','(حديث المسيء صلاته) إذا قمت إلى الصلاة فأسبغ الوضوء ثم استقبل القبلة فكبر',M],
+[207,'محمد بن عمرو بن عطاء','أنه كان جالساً مع نفر من أصحاب النبي ﷺ',BU],
+[210,'عبدة','سبحانك اللهم وبحمدك','مسلم'],
+[211,'عائشة','كان رسول الله ﷺ يستفتح الصلاة بالتكبير',MS],
+[213,'عبد الله بن عمر','أن رسول الله ﷺ كان يرفع يديه حذو منكبيه',M],
+[215,'وائل بن حجر','أنه رأى النبي ﷺ رفع يديه حين دخل في الصلاة',R('أبو داود والنسائي')],
+[217,'أبو هريرة','كان رسول الله ﷺ يسكت بين التكبير وبين القراءة إسكاتة',M],
+[218,'عبادة بن الصامت','لا صلاة لمن لم يقرأ بأم القرآن',M],
+[222,'نعيم المجمر','صليت وراء أبي هريرة فقرأ بسم الله الرحمن الرحيم',R('النسائي وابن خزيمة وابن حبان والدارقطني والحاكم والبيهقي والخطيب')],
+[223,'عبادة بن الصامت','لعلكم تقرؤون خلف إمامكم',R('أحمد وأبو داود والترمذي وابن حبان والدارقطني')],
+[224,'أبو موسى','أن رسول الله ﷺ خطبنا فبين لنا سنتنا وعلمنا صلاتنا',MS],
+[225,'عبد الله بن أبي أوفى','جاء رجل إلى النبي ﷺ فقال: إني لا أستطيع أن آخذ من القرآن شيئاً',R('أحمد وأبو داود والنسائي وابن حبان والدارقطني والحاكم')],
+[226,'أبو هريرة','إذا أمّن الإمام فأمّنوا',M],
+[227,'أبو قتادة','كان رسول الله ﷺ يصلي بنا فيقرأ في الظهر والعصر',M],
+[229,'أبو هريرة','ويقرأ في العشاء بوسط المفصل',R('ابن ماجه والنسائي')],
+[232,'عباس بن سهل / أبو حميد','أنا أعلمكم بصلاة رسول الله ﷺ',R('أبو داود والترمذي')],
+[233,'ابن عباس','كشف رسول الله ﷺ الستارة والناس صفوف خلف أبي بكر',MS],
+[234,'عائشة','يقول في ركوعه وسجوده: سبحانك اللهم ربنا وبحمدك اللهم اغفر لي',M],
+[236,'أبو هريرة','كان رسول الله ﷺ إذا قام إلى الصلاة يكبر حين يقوم',M],
+[237,'أبو هريرة','إذا قال الإمام: سمع الله لمن حمده',M],
+[238,'أبو سعيد الخدري','كان رسول الله ﷺ إذا رفع رأسه من الركوع قال: اللهم ربنا لك الحمد',MS],
+[239,'وائل بن حجر','رأيت النبي ﷺ إذا سجد وضع ركبتيه قبل يديه',R('أبو داود والترمذي والنسائي وابن ماجه والدارقطني والحاكم')],
+[240,'أبو هريرة','إذا سجد أحدكم فلا يبرك كما يبرك البعير',R('أحمد وأبو داود والترمذي والنسائي')],
+[241,'ابن عباس','أمرت أن أسجد على سبعة أعظم',M],
+[242,'عبد الله بن مالك بن بحينة','أن النبي ﷺ كان إذا صلى فرج بين يديه حتى يبدو بياض إبطيه',M],
+[243,'البراء بن عازب','إذا سجدت فضع كفيك وارفع مرفقيك',MS],
+[244,'وائل بن حجر','أن النبي ﷺ كان إذا ركع فرج بين أصابعه وإذا سجد ضم أصابعه',R('البيهقي والحاكم')],
+[245,'ابن عباس','بين السجدتين: اللهم اغفر لي وارحمني واجبرني وارفعني وارزقني واهدني وعافني',R('أبو داود والترمذي وابن ماجه والحاكم')],
+[246,'مالك بن الحويرث','أنه رأى النبي ﷺ يصلي فإذا كان في وتر من صلاته لم ينهض حتى يستوي قاعداً',BU],
+[247,'أنس بن مالك','ما زال رسول الله ﷺ يقنت في الفجر حتى فارق الدنيا',R('أحمد والدارقطني والحاكم')],
+[248,'سعد بن طارق الأشجعي','قلت لأبي: يا أبت إنك قد صليت خلف رسول الله ﷺ',R('أحمد وابن ماجه والنسائي والترمذي')],
+[249,'أنس بن مالك','أن رسول الله ﷺ قنت شهراً بعد الركوع يدعو على أحياء من أحياء العرب',M],
+[251,'الحسن بن علي','علمني رسول الله ﷺ كلمات أقولهن في قنوت الوتر',R('أحمد وأبو داود والترمذي والنسائي وابن ماجه')],
+[252,'ابن عمر','أن رسول الله ﷺ كان إذا قعد للتشهد وضع يده اليسرى على ركبته اليسرى',MS],
+[253,'عبد الله بن الزبير','كان رسول الله ﷺ إذا قعد في الصلاة جعل قدمه اليسرى بين فخذه وساقه',MS],
+[254,'عبد الله بن مسعود','كنا إذا صلينا خلف النبي ﷺ قلنا: السلام على جبريل وميكائيل',M],
+[257,'عمر','لا تجوز صلاة إلا بتشهد','رواه سعيد'],
+[258,'فضالة بن عبيد','سمع رسول الله ﷺ رجلاً يدعو في صلاته لم يمجد الله',R('أحمد وأبو داود والترمذي والنسائي وابن حبان والحاكم')],
+[259,'أبو مسعود الأنصاري','أتانا رسول الله ﷺ ونحن في مجلس سعد بن عبادة',MS],
+[260,'أبو بكر الصديق','علمني رسول الله ﷺ دعاءً أدعو به في صلاتي',M],
+[261,'أبو هريرة','إذا تشهد أحدكم فليستعذ بالله من أربع',M],
+[263,'وائل بن حجر','صليت مع النبي ﷺ فكان يسلم عن يمينه: السلام عليكم ورحمة الله وبركاته',R('أبو داود')],
+[265,'عبد الله بن الزبير','كان ابن الزبير يقول في دبر كل صلاة حين يسلم: لا إله إلا الله وحده لا شريك له',MS],
+[267,'ثوبان','كان رسول الله ﷺ إذا انصرف من صلاته استغفر ثلاثاً',MS],
+[268,'أبو هريرة','من سبح الله دبر كل صلاة ثلاثاً وثلاثين',MS],
+[269,'معاذ','أوصيك يا معاذ لا تدعن في دبر كل صلاة تقول: اللهم أعني على ذكرك وشكرك وحسن عبادتك',R('أحمد وأبو داود والنسائي')],
+[270,'أبو أمامة','من قرأ آية الكرسي دبر كل صلاة مكتوبة لم يمنعه من دخول الجنة إلا الموت',R('النسائي والروياني وابن حبان والدارقطني والطبراني')],
+[271,'عقبة بن عامر','كانت علينا رعاية الإبل فجاءت نوبتي فرحلتها بعشي',MS],
+[272,'أبو جهم','لو يعلم المار بين يدي المصلي ماذا عليه',M],
+[274,'عائشة','سئل رسول الله ﷺ عن سترة المصلي',MS],
+[275,'أبو هريرة','إذا صلى أحدكم فليجعل تلقاء وجهه شيئاً',R('أحمد وابن حبان وابن ماجه وأبو داود')],
+[276,'سهل بن أبي حثمة','إذا صلى أحدكم إلى سترة فليدن منها',R('أبو داود والنسائي وابن حبان وأحمد')],
+[277,'أبو هريرة','نهي أن يصلي الرجل مختصراً',M],
+[279,'أنس','إذا كان أحدكم في الصلاة فإنه يناجي ربه',M],
+[280,'أبو فاطمة الدوسي (معيقيب)','ذكر النبي ﷺ المسجد… إن كنت لا بد فاعلاً فواحدة',M],
+[282,'أبو هريرة','أما يخشى أحدكم إذا رفع رأسه قبل الإمام أن يجعل الله رأسه رأس حمار',M],
+[283,'عائشة','سألت رسول الله ﷺ عن الالتفات في الصلاة',BU],
+[286,'أنس','كان قرام لعائشة سترت به جانب بيتها',BU],
+[287,'عائشة','سمعت رسول الله ﷺ يقول: لا صلاة بحضرة طعام',MS],
+[288,'جابر بن سمرة','أبصر رسول الله ﷺ قوماً رافعي أبصارهم إلى السماء',MS],
+[289,'أبو هريرة','التثاؤب في الصلاة من الشيطان',R('الترمذي ومسلم')],
+[290,'محمد بن سيرين','أن النبي ﷺ صلى إحدى صلاتي العشي',M],
+[291,'عمران بن حصين','أن رسول الله ﷺ صلى العصر فسلم في ثلاث',MS],
+[293,'أبو سعيد الخدري','إذا شك أحدكم في صلاته',MS],
+[295,'ابن مسعود','قال إبراهيم: زاد أو نقص',M],
+[296,'عبد الله ابن بحينة','أن رسول الله ﷺ قام في صلاة الظهر وعليه جلوس',M],
+[297,'ابن مسعود','أن رسول الله ﷺ صلى الظهر خمساً',M],
+[299,'جابر بن عبد الله','سئل رسول الله ﷺ: أي الصلاة أفضل',MS],
+[300,'ربيعة بن كعب الأسلمي','كنت أبيت مع النبي ﷺ',MS],
+[301,'ابن عمر','حفظت من النبي ﷺ عشر ركعات',M],
+[302,'عائشة','أن النبي ﷺ كان لا يدع أربعاً قبل الظهر',BU],
+[303,'عائشة','لم يكن النبي ﷺ على شيء من النوافل أشد تعاهداً منه على ركعتي الفجر',M],
+[304,'أم حبيبة','من صلى اثنتي عشرة ركعة في يوم وليلة بني له بيت في الجنة',MS],
+[305,'أم حبيبة','من حافظ على أربع ركعات قبل الظهر وأربع بعدها حرمه الله على النار',R('أحمد وأبو داود والترمذي والنسائي وابن ماجه')],
+[307,'ابن عمر','رحم الله امرأً صلى أربعاً قبل العصر',R('أحمد وأبو داود وابن خزيمة والترمذي')],
+[309,'عبد الله بن مغفل','صلوا قبل صلاة المغرب',R('البخاري وابن حبان')],
+[311,'عائشة','كان النبي ﷺ يخفف الركعتين قبل صلاة الصبح',M],
+[316,'ابن عمر','صلاة الليل مثنى مثنى',M],
+[319,'زيد بن خالد الجهني','لأرمقن صلاة رسول الله ﷺ الليلة',MS],
+[322,'عبد الله بن عمرو بن العاص','يا عبد الله لا تكن مثل فلان',M],
+[323,'علي بن أبي طالب','يا أهل القرآن أوتروا',R('أحمد وأبو داود والنسائي وابن ماجه وابن خزيمة والترمذي')],
+[326,'ابن عمر','اجعلوا آخر صلاتكم بالليل وتراً',M],
+[327,'أبو سلمة','سألت عائشة عن صلاة رسول الله ﷺ: كان يصلي ثلاث عشرة ركعة',MS],
+[328,'مسروق','سألت عائشة عن صلاة رسول الله ﷺ',BU],
+[329,'طلق بن علي','سمعت رسول الله ﷺ يقول: لا وتران في ليلة',R('أحمد وأبو داود والنسائي وابن حبان والترمذي')],
+[330,'أبي بن كعب','كان رسول الله ﷺ يوتر بسبح اسم ربك الأعلى',R('أحمد وأبو داود والنسائي وابن ماجه')],
+[331,'عائشة','كان رسول الله ﷺ يصلي من الليل ثلاث عشرة ركعة',MS],
+[332,'عائشة','من كل الليل قد أوتر رسول الله ﷺ',M],
+[333,'أبو سعيد الخدري','أوتروا قبل أن تصبحوا',MS],
+[334,'جابر بن عبد الله','من خاف أن لا يقوم من آخر الليل فليوتر أوله',MS],
+[336,'أبو سعيد الخدري','من نام عن الوتر أو نسيه فليصل إذا أصبح أو ذكر',R('أحمد وأبو داود والترمذي وابن ماجه')],
+[338,'أبو هريرة','أوصاني خليلي بثلاث: صيام ثلاثة أيام من كل شهر وركعتي الضحى وأن أوتر قبل أن أنام',M],
+[340,'زيد بن أرقم','أنه رأى قوماً يصلون من الضحى في مسجد قباء',MS],
+[341,'عائشة','كان رسول الله ﷺ يصلي الضحى أربعاً',MS],
+[345,'جابر بن عبد الله','كان رسول الله ﷺ يعلمنا الاستخارة في الأمور',BU],
+[346,'أبو هريرة','إذا قرأ ابن آدم السجدة فسجد',MS],
+[350,'ابن عباس','أن النبي ﷺ سجد بالنجم',BU],
+[354,'البراء','بعث النبي ﷺ خالد بن الوليد إلى أهل اليمن',R('البيهقي')],
+[356,'ابن عمر','صلاة الجماعة أفضل من صلاة الفذ بسبع وعشرين درجة',M],
+[357,'أبو هريرة','لقد هممت أن آمر بحطب',M],
+[358,'ابن عمر','لا تمنعوا إماء الله مساجد الله',M],
+[359,'زينب الثقفية','إذا شهدت إحداكن المسجد فلا تمس طيباً',MS],
+[360,'أبو موسى','إن أعظم الناس أجراً في الصلاة أبعدهم إليها ممشى',M],
+[362,'نافع','أذن ابن عمر في ليلة باردة بضجنان',M],
+[364,'أنس','أن رسول الله ﷺ سئل عن الثوم',M],
+[365,'يزيد بن الأسود','أنه صلى مع رسول الله ﷺ صلاة الصبح',R('أحمد والنسائي وأبو داود والترمذي')],
+[366,'أبو هريرة','أتى النبي ﷺ رجل أعمى',MS],
+[367,'أبو هريرة','إنما جعل الإمام ليؤتم به',R('أحمد وأبو داود')],
+[368,'البراء','أنهم كانوا يصلون مع رسول الله ﷺ',M],
+[370,'زيد بن ثابت','احتجر رسول الله ﷺ حجيرة',M],
+[371,'جابر','صلى معاذ لأصحابه العشاء',M],
+[372,'عائشة','لما ثقل رسول الله ﷺ جاء بلال يؤذنه بالصلاة، قال: مروا أبا بكر فليصل بالناس',M],
+[373,'أبو هريرة','إذا أم أحدكم الناس فليخفف',M],
+[374,'عمرو بن سلمة الجرمي','كنا بماء ممر الناس',BU],
+[376,'أبو مسعود','يؤم القوم أقرؤهم لكتاب الله',MS],
+[377,'ابن مسعود','ليلني منكم أولو الأحلام والنهى',MS],
+[378,'أنس بن مالك','رصوا صفوفكم وقاربوا بينها',R('أحمد وأبو داود والنسائي وابن حبان')],
+[379,'أبو هريرة','خير صفوف الرجال أولها',MS],
+[380,'ابن عباس','صليت مع رسول الله ﷺ ذات ليلة فقمت عن يساره',M],
+[381,'أنس','صلى رسول الله ﷺ في بيت أم سليم',M],
+[382,'أبو بكرة','أنه انتهى إلى النبي ﷺ وهو راكع',BU],
+[383,'وابصة بن معبد','أن رسول الله ﷺ رأى رجلاً يصلي خلف الصف وحده',R('أحمد وأبو داود وابن حبان والترمذي')],
+[384,'أبو هريرة','إذا سمعتم الإقامة فامشوا إلى الصلاة',M],
+[385,'عمران بن حصين','كانت بي بواسير فسألت النبي ﷺ عن الصلاة',BU],
+[386,'جابر','أن رسول الله ﷺ عاد مريضاً',R('البيهقي')],
+[388,'عائشة','رأيت النبي ﷺ يصلي متربعاً',R('النسائي والدارقطني والحاكم')],
+[389,'عائشة','الصلاة أول ما فرضت ركعتين',M],
+[391,'ابن عمر','إن الله يحب أن تؤتى رخصه كما يكره أن تؤتى معصيته',R('أحمد وابن خزيمة وابن حبان وأبو يعلى')],
+[393,'العلاء بن الحضرمي','أن رسول الله ﷺ كان يصلي في السفر',M],
+[395,'ابن عباس','أقام النبي ﷺ تسعة عشر يقصر',BU],
+[397,'أنس بن مالك','كان رسول الله ﷺ إذا ارتحل قبل أن تزيغ الشمس',M],
+[399,'نافع','أن ابن عمر كان إذا جد به السير جمع بين المغرب والعشاء',M],
+[400,'نافع وعبد الله بن واقد','أن مؤذن ابن عمر قال: الصلاة',R('أبو داود')],
+[402,'ابن عباس','أن النبي ﷺ صلى بالمدينة سبعاً وثمانياً',M],
+[404,'معاذ','أن النبي ﷺ كان في غزوة تبوك إذا ارتحل قبل زيغ الشمس',R('أحمد وأبو داود والترمذي')]
+];
+const DATA=RAW.map((r,i)=>({n:i+1,h:r[0],a:r[1],m:r[2],t:r[3]}));
+const INT=[1,1,2,4,7,14,30]; // интервалы по уровням (дни)
+
+/* ---------- ЯЗЫКИ ---------- */
+const T=(ru,en,ar)=>({ru,en,ar});
+const I={
+  title:T('Повторение хадисов','Hadith Review','مراجعة الأحاديث'),
+  sub:T('аль-Мухарраар · 150 хадисов','Al-Muharrar · 150 hadiths','المحرر · 150 حديثاً'),
+  tab_quiz:T('Викторина','Quiz','الاختبار'),
+  tab_pick:T('Что выучено','Memorized','المحفوظ'),
+  tab_stats:T('Прогресс','Progress','التقدم'),
+  streak:T(d=>'Серия: '+d+' дн.',d=>'Streak: '+d+' d',d=>'المتتالية: '+d+' يوم'),
+  emptyTitle:T('Пока нет выученных хадисов','No memorized hadiths yet','لا توجد أحاديث محفوظة بعد'),
+  emptyText:T('Отметьте хадисы, которые вы уже заучили, — викторина будет спрашивать только их.','Mark the hadiths you have already memorized — the quiz will ask only about those.','حدّد الأحاديث التي حفظتها، وسيقتصر الاختبار عليها.'),
+  choose:T('Выбрать хадисы','Choose hadiths','اختيار الأحاديث'),
+  dueToday:T('к повторению сегодня','due for review today','للمراجعة اليوم'),
+  memOf:T(n=>'выучено из '+n,n=>'memorized of '+n,n=>'محفوظ من '+n),
+  setup:T('Настройка занятия','Session setup','إعداد الجلسة'),
+  qType:T('Тип вопросов','Question type','نوع الأسئلة'),
+  m_mix:T('Смешанный','Mixed','متنوع'),
+  m_flash:T('Карточки: продолжи хадис вслух','Flashcards: continue the hadith aloud','بطاقات: أكمل الحديث شفهياً'),
+  m_narr:T('Матн → кто передал','Text → narrator','المتن ← الراوي'),
+  m_takh:T('Матн → تخريج (источники)','Text → sources (takhrij)','المتن ← التخريج'),
+  m_num:T('Матн → номер хадиса','Text → hadith number','المتن ← رقم الحديث'),
+  m_matn:T('Начало хадиса → выбрать продолжение','Opening → pick the continuation','بداية الحديث ← اختيار التتمة'),
+  howMany:T('Сколько хадисов','How many hadiths','عدد الأحاديث'),
+  all:T('Все','All','الكل'),
+  practice:T('Тренировка вне очереди (любые выученные, а не только к повторению)','Extra practice (any memorized hadith, not only those due)','تدريب إضافي (أي حديث محفوظ، لا المستحق فقط)'),
+  start:T('Начать','Start','ابدأ'),
+  allDone:T('На сегодня всё повторено. Можно включить тренировку вне очереди.','Everything is reviewed for today. You can turn on extra practice.','تمت مراجعة كل شيء لليوم. يمكنك تفعيل التدريب الإضافي.'),
+  finish:T('Завершить','Finish','إنهاء'),
+  xOfY:T((i,n)=>i+' из '+n,(i,n)=>i+' of '+n,(i,n)=>i+' من '+n),
+  retry:T(' · повтор ошибки',' · retry',' · إعادة'),
+  flashQ:T('Продолжите хадис вслух, затем откройте ответ','Continue the hadith aloud, then reveal the answer','أكمل الحديث بصوت مسموع ثم اكشف الجواب'),
+  more:T('Ещё слово','One more word','كلمة أخرى'),
+  show:T('Показать ответ','Show answer','أظهر الجواب'),
+  yes:T('Помню','I remember','أذكره'),
+  no:T('Не помню','I don\'t remember','لا أذكره'),
+  next:T('Дальше','Next','التالي'),
+  askNarr:T('Кто передал этот хадис?','Who narrated this hadith?','من راوي هذا الحديث؟'),
+  askTakh:T('Кто выпустил этот хадис? (تخريج)','Who recorded this hadith? (takhrij)','من خرّج هذا الحديث؟'),
+  askNum:T('Какой номер у этого хадиса в книге?','What is this hadith\'s number in the book?','ما رقم هذا الحديث في الكتاب؟'),
+  askCont:T('Как продолжается этот хадис?','How does this hadith continue?','كيف يُتمّ هذا الحديث؟'),
+  numSign:T('№','#','رقم'),
+  hadith:T('хадис','hadith','حديث'),
+  inList:T('в списке','in list','في القائمة'),
+  firstTry:T('правильно с первого раза','correct on the first try','صحيح من أول محاولة'),
+  attention:T('Хадисы для внимания:','Hadiths to look at again:','أحاديث تحتاج إلى مراجعة:'),
+  noMist:T('Ошибок нет. Так держать!','No mistakes. Well done!','لا أخطاء. أحسنت!'),
+  back:T('Вернуться','Back','رجوع'),
+  learned:T((n,t)=>'Выучено: '+n+' из '+t,(n,t)=>'Memorized: '+n+' of '+t,(n,t)=>'المحفوظ: '+n+' من '+t),
+  selAll:T('Все','All','الكل'),
+  clear:T('Сбросить','Clear','مسح'),
+  from:T('С №','From #','من رقم'),
+  to:T('По №','To #','إلى رقم'),
+  mark:T('Выучено','Memorized','محفوظ'),
+  unmark:T('Снять','Unmark','إزالة'),
+  search:T('Поиск по тексту или راوي','Search text or narrator','ابحث في المتن أو الراوي'),
+  pickNote:T('№ — порядковый номер в вашей таблице (1–150). Номер хадиса в книге указан в карточке.','# is the row number in your table (1–150). The hadith number in the book is shown on each card.','الرقم هو ترتيب الحديث في جدولك (1–150). أما رقم الحديث في الكتاب فيظهر على البطاقة.'),
+  notFound:T('Ничего не найдено','Nothing found','لا توجد نتائج'),
+  statsTitle:T('Как хорошо держатся хадисы','How well the hadiths hold','مدى ثبات الأحاديث'),
+  levels:T(['Новый / ошибся','1 день','2 дня','4 дня','7 дней','14 дней','30 дней'],['New / missed','1 day','2 days','4 days','7 days','14 days','30 days'],['جديد / أخطأت','يوم','يومان','4 أيام','7 أيام','14 يوماً','30 يوماً']),
+  statsNote:T('Чем выше уровень, тем реже хадис попадает в повторение: после верного ответа интервал растёт, после ошибки — сбрасывается.','The higher the level, the less often a hadith comes up: a correct answer lengthens the interval, a mistake resets it.','كلما ارتفع المستوى قلّ ظهور الحديث: الإجابة الصحيحة تُطيل المدة، والخطأ يعيده إلى البداية.'),
+  statsEmpty:T('Отметьте выученные хадисы, и здесь появится статистика.','Mark the hadiths you have memorized and your stats will appear here.','حدّد الأحاديث المحفوظة لتظهر الإحصاءات هنا.'),
+  totalAns:T('Всего ответов','Total answers','مجموع الإجابات'),
+  streakDays:T('Серия дней подряд','Day streak','أيام متتالية'),
+  dueNow:T('К повторению сегодня','Due today','مستحق اليوم'),
+  backup:T('Резервная копия','Backup','نسخة احتياطية'),
+  backupNote:T('Данные хранятся в этом браузере. Чтобы перенести на другое устройство, скопируйте текст ниже и вставьте там в это же поле.','Your data is stored in this browser. To move it to another device, copy the text below and paste it into the same field there.','تُحفظ بياناتك في هذا المتصفح. لنقلها إلى جهاز آخر انسخ النص أدناه والصقه في الحقل نفسه هناك.'),
+  loadBtn:T('Загрузить из поля','Load from field','تحميل من الحقل'),
+  resetAll:T('Сбросить всё','Reset everything','إعادة الضبط'),
+  sure:T('Точно сбросить?','Really reset?','تأكيد الإعادة؟'),
+  importErr:T('Не удалось прочитать данные. Проверьте, что скопирован весь текст.','Could not read the data. Make sure the whole text was copied.','تعذّرت قراءة البيانات. تأكد من نسخ النص كاملاً.')
+};
+
+/* ---------- ХРАНИЛИЩЕ ---------- */
+const KEY='muharrar-quiz-v1';
+let S={learned:{},prog:{},streak:0,last:null,reviews:0,lang:'ru'};
+try{const v=localStorage.getItem(KEY); if(v) S=Object.assign(S,JSON.parse(v));}catch(e){}
+if(!I.title[S.lang]) S.lang='ru';
+let L=S.lang;
+const t=(k,...a)=>{const v=I[k][L];return typeof v==='function'?v(...a):v};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const dayNum=()=>{const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5)};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const learnedItems=()=>DATA.filter(d=>S.learned[d.n]);
+const dueItems=()=>{const d=dayNum();return learnedItems().filter(x=>!S.prog[x.n]||S.prog[x.n].due<=d)};
+function curStreak(){return (S.last!==null && S.last>=dayNum()-1)?S.streak:0}
+const fresh=()=>({learned:{},prog:{},streak:0,last:null,reviews:0,lang:L});
+
+/* ---------- ИНТЕРФЕЙС ---------- */
+let tab='quiz', Q=null, pickFilter='';
+const app=document.getElementById('app');
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.tab;render()}));
+document.getElementById('lang').addEventListener('change',e=>{L=e.target.value;S.lang=L;save();render()});
+
+function applyLang(){
+  const h=document.documentElement;
+  h.setAttribute('lang',L); h.setAttribute('dir',L==='ar'?'rtl':'ltr');
+  document.title=t('title')+' — '+(L==='ar'?'المحرر':'Al-Muharrar');
+  document.getElementById('ttl').innerHTML=esc(t('title'))+'<small>'+esc(t('sub'))+'</small>';
+  document.getElementById('lang').value=L;
+  document.querySelectorAll('nav button').forEach(b=>{b.textContent=t('tab_'+b.dataset.tab);b.setAttribute('aria-current',b.dataset.tab===tab)});
+  const s=curStreak();
+  document.getElementById('streak').textContent=t('streak',s);
+}
+
+function render(){
+  applyLang();
+  if(tab==='quiz') Q&&Q.active?renderQuestion():(Q&&Q.done?renderDone():renderHome());
+  else if(tab==='pick') renderPick();
+  else renderStats();
+  window.scrollTo(0,0);
+}
+
+/* --- Главная викторины --- */
+let cfg={mode:'mix',count:'10',practice:false};
+function renderHome(){
+  const Ln=learnedItems().length, due=dueItems().length;
+  if(!Ln){
+    app.innerHTML=`<div class="card empty"><h2>${t('emptyTitle')}</h2>
+    <p class="muted">${t('emptyText')}</p>
+    <button class="btn" id="go">${t('choose')}</button></div>`;
+    document.getElementById('go').onclick=()=>{tab='pick';render()};
+    return;
+  }
+  const modes=['mix','flash','narr','takh','num','matn'];
+  app.innerHTML=`
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div><div class="big">${due}</div><div class="muted">${t('dueToday')}</div></div>
+      <div style="text-align:end"><div class="big" style="font-size:1.6rem;color:var(--ink)">${Ln}</div><div class="muted">${t('memOf',DATA.length)}</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>${t('setup')}</h2>
+    <div class="row" style="margin-bottom:10px">
+      <label class="f">${t('qType')}
+        <select id="mode">${modes.map(m=>`<option value="${m}">${esc(t('m_'+m))}</option>`).join('')}</select></label>
+      <label class="f">${t('howMany')}
+        <select id="count"><option>5</option><option>10</option><option>20</option><option value="all">${t('all')}</option></select></label>
+    </div>
+    <label class="row muted" style="gap:8px;margin-bottom:12px"><input type="checkbox" id="practice" style="width:20px;height:20px"> ${t('practice')}</label>
+    <button class="btn" id="start" style="width:100%">${t('start')}</button>
+    <p class="muted" id="hint" style="margin:10px 0 0"></p>
+  </div>`;
+  const $=id=>document.getElementById(id);
+  $('mode').value=cfg.mode;$('count').value=cfg.count;$('practice').checked=cfg.practice;
+  const upd=()=>{
+    cfg={mode:$('mode').value,count:$('count').value,practice:$('practice').checked};
+    const n=cfg.practice?Ln:due;
+    $('start').disabled=n===0;
+    $('hint').textContent=n===0?t('allDone'):'';
+  };
+  ['mode','count','practice'].forEach(i=>$(i).addEventListener('change',upd));
+  upd();
+  $('start').onclick=startQuiz;
+}
+
+/* --- Запуск --- */
+function startQuiz(){
+  let pool=cfg.practice?shuffle(learnedItems()):dueItems().sort((a,b)=>((S.prog[a.n]||{due:0}).due)-((S.prog[b.n]||{due:0}).due)||Math.random()-.5);
+  if(cfg.count!=='all') pool=pool.slice(0,+cfg.count);
+  Q={active:true,done:false,queue:pool.map(item=>({item,retry:false})),idx:0,total:pool.length,correct:0,wrong:[],answered:false};
+  render();
+}
+
+/* --- Генерация вопроса --- */
+function options(item,key,near){
+  const out=[item[key]],seen=new Set([String(item[key])]);
+  let cand=shuffle(DATA);
+  if(near) cand=shuffle(DATA.filter(d=>Math.abs(d.h-item.h)<=40)).concat(cand);
+  for(const d of cand){ if(out.length>=4)break; const v=String(d[key]); if(!seen.has(v)){seen.add(v);out.push(d[key]);} }
+  return shuffle(out);
+}
+function buildQ(item){
+  let ty=cfg.mode;
+  if(ty==='mix') ty=['flash','narr','takh','num','matn'][Math.floor(Math.random()*5)];
+  const q={item,type:ty};
+  if(ty==='narr'){q.askKey='askNarr';q.key='a';q.opts=options(item,'a');}
+  if(ty==='takh'){q.askKey='askTakh';q.key='t';q.opts=options(item,'t');}
+  if(ty==='num'){q.askKey='askNum';q.key='h';q.opts=options(item,'h',true);}
+  if(ty==='matn'){
+    const w=item.m.split(' '), k=Math.max(1,Math.min(4,w.length-1));
+    q.start=w.slice(0,k).join(' '); q.askKey='askCont'; q.correct=w.slice(k).join(' ');
+    const seen=new Set([q.correct]), out=[q.correct];
+    for(const d of shuffle(DATA)){
+      if(out.length>=4)break;
+      const dw=d.m.split(' '), r=dw.slice(Math.min(k,dw.length-1)).join(' ');
+      if(!seen.has(r)){seen.add(r);out.push(r);}
+    }
+    q.opts=shuffle(out);
+  }
+  if(q.correct===undefined) q.correct=item[q.key];
+  return q;
+}
+function full(item){
+  return `<div class="reveal"><div class="meta"><span class="chip">${t('numSign')} ${item.h}</span><span class="chip">${t('inList')}: ${item.n}</span></div>
+  <div class="ar">${esc(item.m)}</div>
+  <div class="ar sm" style="color:var(--muted)">${esc(item.a)}</div>
+  <div class="ar sm" style="color:var(--muted)">${esc(item.t)}</div></div>`;
+}
+
+function renderQuestion(){
+  const cur=Q.queue[Q.idx];
+  if(!cur.q) cur.q=buildQ(cur.item);
+  const q=cur.q, item=q.item;
+  Q.answered=false;
+  const pct=Math.round(Q.idx/Q.queue.length*100);
+  let body='';
+  if(q.type==='flash'){
+    body=`<p class="qtype">${t('flashQ')}</p>
+      <div class="ar sm" style="color:var(--muted)">${esc(item.a)}</div>
+      <div class="ar" id="hint"></div>
+      <div id="fb"><div class="actions"><button class="btn sec" id="more">${t('more')}</button><button class="btn" id="show">${t('show')}</button></div></div>`;
+  }else{
+    const isMatn=q.type==='matn', isNum=q.type==='num';
+    const shown=isMatn?`<div class="ar sm" style="color:var(--muted)">${esc(item.a)}</div><div class="ar">${esc(q.start)} …</div>`:`<div class="ar">${esc(item.m)}</div>`;
+    body=`<p class="qtype">${t(q.askKey)}</p>${shown}
+      <div class="opts">${q.opts.map((o,i)=>`<button class="opt ${isNum?'num':''}" data-i="${i}">${esc(o)}</button>`).join('')}</div>
+      <div id="fb"></div>`;
+  }
+  app.innerHTML=`
+    <div class="qhead"><span class="muted">${t('xOfY',Q.idx+1,Q.queue.length)}${cur.retry?t('retry'):''}</span>
+      <button class="btn sec" id="stop" style="padding:6px 12px;font-size:.85rem">${t('finish')}</button></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="card">${body}</div>`;
+  document.getElementById('stop').onclick=finish;
+  if(q.type==='flash'){
+    const w=item.m.split(' '); let k=Math.max(1,Math.min(4,w.length-1));
+    const more=document.getElementById('more');
+    const hint=()=>{document.getElementById('hint').textContent=w.slice(0,k).join(' ')+' …'; if(k>=w.length-1) more.disabled=true;};
+    hint();
+    more.onclick=()=>{ if(k<w.length-1){k++;hint();} };
+    document.getElementById('show').onclick=()=>{
+      document.getElementById('fb').innerHTML=full(item)+`<div class="actions"><button class="btn danger" id="no">${t('no')}</button><button class="btn" id="yes">${t('yes')}</button></div>`;
+      document.getElementById('yes').onclick=()=>answer(true);
+      document.getElementById('no').onclick=()=>answer(false);
+    };
+  }else{
+    app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      if(Q.answered)return;
+      const val=q.opts[+b.dataset.i], ok=String(val)===String(q.correct);
+      app.querySelectorAll('.opt').forEach(x=>{
+        x.disabled=true;
+        if(String(q.opts[+x.dataset.i])===String(q.correct)) x.classList.add('ok');
+      });
+      if(!ok) b.classList.add('bad');
+      document.getElementById('fb').innerHTML=full(item)+`<div class="actions"><button class="btn" id="next">${t('next')}</button></div>`;
+      document.getElementById('next').onclick=next;
+      answer(ok,true);
+    });
+  }
+}
+
+function answer(ok,noAdvance){
+  if(Q.answered)return; Q.answered=true;
+  const cur=Q.queue[Q.idx], item=cur.item;
+  if(!cur.retry){
+    const p=S.prog[item.n]||{box:0,due:0,ok:0,bad:0};
+    p.box=ok?Math.min(6,p.box+1):0;
+    p.due=dayNum()+INT[p.box];
+    ok?p.ok++:p.bad++;
+    S.prog[item.n]=p; S.reviews=(S.reviews||0)+1; save();
+    if(ok)Q.correct++;
+  }
+  if(!ok){
+    if(!cur.retry){Q.wrong.push(item); Q.queue.push({item,retry:true});}
+  }
+  if(!noAdvance) next();
+}
+function next(){
+  Q.idx++;
+  if(Q.idx>=Q.queue.length) finish(); else renderQuestion();
+}
+function finish(){
+  if(Q.queue.length && Q.idx>0){
+    const d=dayNum();
+    if(S.last!==d){S.streak=(S.last===d-1)?(S.streak||0)+1:1;S.last=d;save();}
+  }
+  Q.active=false;Q.done=true;render();
+}
+function renderDone(){
+  const first=Q.queue.filter(x=>!x.retry).length;
+  app.innerHTML=`<div class="card empty">
+    <div class="big">${Q.correct}<span style="font-size:1.2rem;color:var(--muted)"> / ${Math.min(first,Q.total)}</span></div>
+    <p class="muted">${t('firstTry')}</p>
+    <p>${Q.wrong.length?t('attention'):t('noMist')}</p></div>
+    ${Q.wrong.length?`<div class="card"><div class="mist">${Q.wrong.map(w=>`<div><div class="meta"><span class="chip">${t('numSign')} ${w.h}</span></div><div class="ar sm">${esc(w.m)}</div><div class="ar sm" style="color:var(--muted)">${esc(w.a)}</div></div>`).join('')}</div></div>`:''}
+    <button class="btn" id="again" style="width:100%">${t('back')}</button>`;
+  document.getElementById('again').onclick=()=>{Q=null;render()};
+}
+
+/* --- Выбор выученных --- */
+function renderPick(){
+  app.innerHTML=`
+  <div class="sticky">
+    <div class="card" style="margin-bottom:0">
+      <div class="row" style="justify-content:space-between;margin-bottom:8px"><b id="cnt"></b>
+        <span class="row"><button class="btn sec" id="all" style="padding:6px 12px">${t('selAll')}</button><button class="btn sec" id="none" style="padding:6px 12px">${t('clear')}</button></span></div>
+      <div class="row" style="margin-bottom:8px">
+        <label class="f" style="min-width:90px">${t('from')}<input type="number" id="from" min="1" max="${DATA.length}" value="1" inputmode="numeric"></label>
+        <label class="f" style="min-width:90px">${t('to')}<input type="number" id="to" min="1" max="${DATA.length}" value="${DATA.length}" inputmode="numeric"></label>
+        <button class="btn" id="rOn" style="align-self:flex-end">${t('mark')}</button>
+        <button class="btn sec" id="rOff" style="align-self:flex-end">${t('unmark')}</button>
+      </div>
+      <input type="search" id="q" placeholder="${esc(t('search'))}" value="${esc(pickFilter)}" dir="rtl">
+      <p class="muted" style="margin:6px 0 0">${t('pickNote')}</p>
+    </div>
+  </div>
+  <div class="list" id="list" style="margin-top:12px"></div>`;
+  const $=id=>document.getElementById(id);
+  const cnt=()=>{$('cnt').textContent=t('learned',learnedItems().length,DATA.length)};
+  const draw=()=>{
+    const f=pickFilter.trim();
+    const items=DATA.filter(d=>!f||d.m.includes(f)||d.a.includes(f)||String(d.h)===f||String(d.n)===f);
+    $('list').innerHTML=items.length?items.map(d=>`<label class="pick ${S.learned[d.n]?'on':''}"><input type="checkbox" data-n="${d.n}" ${S.learned[d.n]?'checked':''}>
+      <div><div class="top"><span class="chip">${d.n}</span><span class="chip">${t('hadith')} ${d.h}</span></div>
+      <div class="ar">${esc(d.m)}</div><div class="ar sm" style="color:var(--muted)">${esc(d.a)}</div></div></label>`).join('')
+      :`<div class="card empty muted">${t('notFound')}</div>`;
+    $('list').querySelectorAll('input').forEach(c=>c.onchange=()=>{
+      const n=+c.dataset.n; if(c.checked)S.learned[n]=true; else delete S.learned[n];
+      c.closest('.pick').classList.toggle('on',c.checked); save(); cnt();
+    });
+  };
+  const setRange=v=>{
+    let a=Math.max(1,Math.min(DATA.length,+$('from').value||1)), b=Math.max(1,Math.min(DATA.length,+$('to').value||DATA.length));
+    if(a>b)[a,b]=[b,a];
+    for(let n=a;n<=b;n++){ if(v)S.learned[n]=true; else delete S.learned[n]; }
+    save();cnt();draw();
+  };
+  $('rOn').onclick=()=>setRange(true); $('rOff').onclick=()=>setRange(false);
+  $('all').onclick=()=>{DATA.forEach(d=>S.learned[d.n]=true);save();cnt();draw()};
+  $('none').onclick=()=>{S.learned={};save();cnt();draw()};
+  $('q').oninput=e=>{pickFilter=e.target.value;draw()};
+  cnt();draw();
+}
+
+/* --- Прогресс --- */
+let resetArmed=false;
+function renderStats(){
+  const Li=learnedItems(), cnts=new Array(7).fill(0), lv=t('levels');
+  Li.forEach(d=>cnts[(S.prog[d.n]||{box:0}).box]++);
+  const mx=Math.max(1,...cnts);
+  app.innerHTML=`
+  <div class="card"><h2>${t('statsTitle')}</h2>
+    ${Li.length?`<div class="dist">${cnts.map((c,i)=>`<div><span>${lv[i]}</span><span class="b"><i style="width:${c/mx*100}%"></i></span><b>${c}</b></div>`).join('')}</div>
+    <p class="muted">${t('statsNote')}</p>`:`<p class="muted">${t('statsEmpty')}</p>`}
+  </div>
+  <div class="card"><div class="row" style="justify-content:space-between"><span>${t('totalAns')}</span><b>${S.reviews||0}</b></div>
+    <div class="row" style="justify-content:space-between"><span>${t('streakDays')}</span><b>${curStreak()}</b></div>
+    <div class="row" style="justify-content:space-between"><span>${t('dueNow')}</span><b>${dueItems().length}</b></div></div>
+  <div class="card"><h2>${t('backup')}</h2>
+    <p class="muted">${t('backupNote')}</p>
+    <textarea id="bk">${esc(JSON.stringify(S))}</textarea>
+    <div class="actions"><button class="btn sec" id="imp">${t('loadBtn')}</button><button class="btn danger" id="rst">${t('resetAll')}</button></div>
+    <p class="muted" id="msg" style="margin:8px 0 0"></p></div>`;
+  const $=id=>document.getElementById(id);
+  $('imp').onclick=()=>{
+    try{const o=JSON.parse($('bk').value); if(!o||typeof o!=='object'||!o.learned) throw 0;
+      S=Object.assign(fresh(),o); S.lang=L; save(); render();
+    }catch(e){$('msg').textContent=t('importErr');}
+  };
+  $('rst').onclick=()=>{
+    if(!resetArmed){resetArmed=true;$('rst').textContent=t('sure');setTimeout(()=>{resetArmed=false;if($('rst'))$('rst').textContent=t('resetAll')},4000);return;}
+    S=fresh();save();resetArmed=false;render();
+  };
+}
+render();
+</script>
+</body>
+</html>
