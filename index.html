@@ -418,8 +418,6 @@ textarea{min-height:88px;font-size:.78rem;font-family:ui-monospace,SFMono-Regula
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 </style>
-</head>
-<body>
 <div class="topbar"><div class="tb-in">
   <button class="btn sec" id="backBtn" style="display:none;padding:8px 14px">← Назад к предметам</button>
   <div class="hr" id="langWrap"><label class="lg"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.8 2.6 4.2 5.8 4.2 9.5s-1.4 6.9-4.2 9.5c-2.8-2.6-4.2-5.8-4.2-9.5S9.2 5.1 12 2.5z"/></svg><select id="lang" aria-label="Language / Язык / اللغة"><option value="ru">Русский</option><option value="en">English</option><option value="ar">العربية</option></select></label></div>
@@ -2118,7 +2116,6 @@ function createPoemModule(opts){
   const bare=s=>String(s).replace(/[ً-ْٰـ]/g,'');
   let learnIdx=null, learnCut=null, learnBare=false, learnReturn=false;
   function planStart(){
-    const P=planInfo(); if(P.week.b>=P.week.a){ for(let i=P.week.a;i<=P.week.b;i++) if(!S.learned[i]) return i; }
     for(let i=1;i<=N;i++) if(!S.learned[i]) return i;
     return 1;
   }
@@ -2658,7 +2655,11 @@ window.MuharrarModules.mustalah = window.MuharrarPoemFactory({
 (function(){
 "use strict";
 const DATA=[
-{n:790,h1:'فِي فِتْنَةٍ، وَالْمُكْثِرُونَ سِتَّةُ:',h2:'أَنَسٌ، ابْنُ عُمَرَ، الصِّدِّيقَةُ',sec:'معرفة الصحابة (790-816)'},
+{n:786,h1:'رَائِي النَّبِيِّ مُسْلِماً ذُو صُحْبَةِ',h2:'وَقِيلَ: إِنْ طَالَتْ وَلَمْ يُثَبِّتِ',sec:'معرفة الصحابة (786-816)'},
+{n:787,h1:'وَقِيلَ: مَنْ أَقَامَ عَاماً أَوْ غَزَا',h2:'مَعْهُ وَذَا لِابْنِ الْمُسَيِّبِ عَزَا',sec:null},
+{n:788,h1:'وَتُعْرَفُ الصُّحْبَةُ بِاشْتِهَارٍ أَوْ',h2:'تَوَاتُرٍ أَوْ قَوْلِ صَاحِبٍ وَلَوْ',sec:null},
+{n:789,h1:'قَدِ ادَّعَاهَا وَهْوَ عَدْلٌ قُبِلَا',h2:'وَهُمْ عُدُولٌ قِيلَ: لَا مَنْ دَخَلَا',sec:null},
+{n:790,h1:'فِي فِتْنَةٍ، وَالْمُكْثِرُونَ سِتَّةُ:',h2:'أَنَسٌ، ابْنُ عُمَرَ، الصِّدِّيقَةُ',sec:null},
 {n:791,h1:'الْبَحْرُ، جَابِرٌ، أَبُو هُرَيْرَةِ',h2:'أَكْثَرُهُمْ، وَالْبَحْرُ فِي الْحَقِيقَةِ',sec:null},
 {n:792,h1:'أَكْثَرُ فَتْوَى، وَهْوَ وَابْنُ عُمَرَا',h2:'وَابْنُ الزُّبَيْرِ وَابْنُ عَمْرٍو قَدْ جَرَى',sec:null},
 {n:793,h1:'عَلَيْهِمِ بِالشُّهْرَةِ: «الْعَبَادِلَهْ»',h2:'لَيْسَ ابْنَ مَسْعُودٍ، وَلَا مَنْ شَاكَلَهْ',sec:null},
@@ -2727,7 +2728,7 @@ window.MuharrarModules.ruwat = window.MuharrarPoemFactory({
   subtitle:'رواة الحديث — الألفية (الصحابة والتابعون والأسماء والألقاب والطبقات والأوطان)',
   data:DATA,
   pace:7,
-  examDow:3,
+  examDow:2,
   storageKey:'muharrar-ruwat-v1',
   containerId:'app-ruwat',
   ttlId:'ttl-ruwat',
@@ -3941,5 +3942,5 @@ Object.keys(window.MuharrarModules).forEach(k=>window.MuharrarModules[k].setProf
 renderAll();
 })();
 </script>
-</body>
-</html>
+
+</body></html>
